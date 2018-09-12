@@ -1,0 +1,22 @@
+version: '2'
+services:
+  bbdd:
+    image: mysql:5
+    environment:
+     - MYSQL_ROOT_PASSWORD=dadada
+     - MYSQL_DATABASE=prova
+     - MYSQL_USER=armando
+     - MYSQL_PASSWORD=bronca
+    restart: always
+
+  web:
+    image: eboraas/apache-php
+    links:
+      - bbdd:bbdd
+    environment:
+      - ENV_VAR1=some_value
+    ports:
+      - 8081:80
+    volumes:
+     - ./html/:/var/www/html/
+    restart: always
